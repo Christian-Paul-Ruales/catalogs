@@ -16,8 +16,6 @@ import { CatalogDetailModule } from 'src/catalog-detail/catalog-detail.module';
       Catalog
     ]),
     CatalogDetailModule,
-    CreateCatalogDetailDto,
-    UpdateCatalogDetailDto,
   ],
   exports: [CatalogService, TypeOrmModule]
 })

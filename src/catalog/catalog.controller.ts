@@ -1,7 +1,8 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { CatalogService } from './catalog.service';
 import { CreateCatalogDto } from './dto/create-catalog.dto';
 import { UpdateCatalogDto } from './dto/update-catalog.dto';
+import { QueryCatalogDTO } from './dto/query-catalog.dto';
 
 @Controller('catalog')
 export class CatalogController {
@@ -12,14 +13,16 @@ export class CatalogController {
     return this.catalogService.create(createCatalogDto);
   }
 
-  @Get()
-  findAll() {
-    return this.catalogService.findAll();
+  @Get('')
+  async findAll(@Query() catalogQuery: QueryCatalogDTO) {
+    return await this.catalogService.findAll(
+      catalogQuery.offset, 
+      catalogQuery.limit);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.catalogService.findOne(+id);
+  @Get(':code')
+  findOne(@Param('code') code: string) {
+    return this.catalogService.findOne(code);
   }
 
   @Patch(':id')

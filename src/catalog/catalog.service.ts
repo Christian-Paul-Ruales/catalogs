@@ -19,7 +19,9 @@ export class CatalogService {
     private readonly datasource: DataSource
   ) {}
 
-
+  /***
+   * Crear catalogo
+   */
   async create(createCatalogDto: CreateCatalogDto) {
     try {
       const {details = [], ...catalogProps} = createCatalogDto;
@@ -48,12 +50,28 @@ export class CatalogService {
     }
   }
 
-  findAll() {
-    return `This action returns all catalog`;
+  async findAll(offset: number = 0, limit: number = 10) {
+    const catalogs = await this.catalogRepository.find(
+      {
+        skip: offset,
+        take: limit,
+        relations: {
+          details: true
+        }
+      }
+
+
+    );
+  return catalogs.map(
+        catalog => ({...catalog})
+    );
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} catalog`;
+  async findOne(code: string) {
+    return await this.catalogRepository.findOneBy({
+      code
+    });
+
   }
 
   update(id: number, updateCatalogDto: UpdateCatalogDto) {
