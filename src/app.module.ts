@@ -5,7 +5,7 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CatalogModule } from './catalog/catalog.module';
 import { CatalogService } from './catalog/catalog.service';
-import { CatalogController } from './catalog/catalog.controller';
+import { CatalogController } from './infrastructure/controller/catalog.controller';
 import { Catalog } from './catalog/entities/catalog.entity';
 import { CatalogDetailModule } from './catalog-detail/catalog-detail.module';
 import { CatalogDetailController } from './catalog-detail/catalog-detail.controller';
