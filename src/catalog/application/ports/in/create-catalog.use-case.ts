@@ -1,5 +1,5 @@
-import { CreateCatalogDto } from "src/catalog/dto/create-catalog.dto";
-import { Catalog } from "src/catalog/entities/catalog.entity";
+import { Catalog } from "src/catalog/infrastructure/persistence/entities/catalog.entity";
+import { CreateCatalogDto } from "../../dto/create-catalog.dto";
 
 export interface CreateCatalogUseCase {
     /**

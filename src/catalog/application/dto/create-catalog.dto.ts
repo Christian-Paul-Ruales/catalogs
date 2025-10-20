@@ -1,5 +1,5 @@
 import { IsArray, IsBoolean, IsDate, IsOptional, IsString, Length, MaxLength, min, MinLength } from "class-validator";
-import { CreateCatalogDetailDto } from "src/catalog-detail/dto/create-catalog-detail.dto";
+import { CreateCatalogDetailDto } from "./create-catalog-detail.dto";
 
 export class CreateCatalogDto {
     @IsString()

@@ -1,5 +1,5 @@
 import { IsBoolean, IsDate, IsOptional, IsString } from "class-validator";
-import { CreateCatalogDto } from "src/catalog/dto/create-catalog.dto";
+import { CreateCatalogDto } from "./create-catalog.dto";
 
 export class CreateCatalogDetailDto {
 

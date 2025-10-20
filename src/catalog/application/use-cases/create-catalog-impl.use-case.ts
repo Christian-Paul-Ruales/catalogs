@@ -1,16 +1,18 @@
-import { Catalog } from "src/catalog/entities/catalog.entity";
-import { CreateCatalogUseCase } from "../create-catalog.use-case";
+import { Catalog } from "src/catalog/infrastructure/persistence/entities/catalog.entity";
 import { Inject, Injectable } from "@nestjs/common";
-import type { CatalogRepository } from "src/application/ports/in/catalog.repository";
-import { CreateCatalogDto } from "src/catalog/dto/create-catalog.dto";
-import { CatalogDetail } from "src/catalog-detail/entities/catalog-detail.entity";
+import { CatalogDetail } from "src/catalog/infrastructure/persistence/entities/catalog-detail.entity";
+import { DeepPartial } from "typeorm";
+import { CreateCatalogDto } from "../dto/create-catalog.dto";
+import { CreateCatalogUseCase } from "../ports/in/create-catalog.use-case";
+import type { CatalogRepository } from "../ports/out/catalog.repository";
 
 @Injectable()
 export class CreateCatalogUseCaseImpl implements CreateCatalogUseCase {
     constructor(
-        @Inject('CatalogRepository')
+        @Inject('elrepo')
         private readonly catalogRepository: CatalogRepository,
     ) {}
+
     async execute(dto: CreateCatalogDto) {
             /*** INTRODUCIR LOGICA AQUI :)*/
         
@@ -19,13 +21,8 @@ export class CreateCatalogUseCaseImpl implements CreateCatalogUseCase {
             ...props
         } = dto
 
-        const deta = new CatalogDetail(
-            
-        );
-
         const catalogDetails = details.map(
             det => ({
-                id: null, 
                 code: det.code,
                 name: det.name,
                 origin: det.origin,

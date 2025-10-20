@@ -1,22 +1,34 @@
 import { Module } from '@nestjs/common';
-import { CatalogService } from './catalog.service';
-import { CatalogController } from '../infrastructure/controller/catalog.controller';
-import { Catalog } from './entities/catalog.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { CatalogDetail } from 'src/catalog-detail/entities/catalog-detail.entity';
-import { CreateCatalogDetailDto } from 'src/catalog-detail/dto/create-catalog-detail.dto';
-import { UpdateCatalogDetailDto } from 'src/catalog-detail/dto/update-catalog-detail.dto';
-import { CatalogDetailModule } from 'src/catalog-detail/catalog-detail.module';
+import { Catalog } from './infrastructure/persistence/entities/catalog.entity';
+import { CatalogDetail } from './infrastructure/persistence/entities/catalog-detail.entity';
+import { CatalogController } from './infrastructure/controller/catalog.controller';
+import { CatalogRepositoryImpl } from './infrastructure/adapter/repository/CatalogRepositoryImpl';
+import { GetCatalogUseCaseImpl } from './application/use-cases/get-catalog-impl.use-case';
+import { CreateCatalogUseCaseImpl } from './application/use-cases/create-catalog-impl.use-case';
 
 @Module({
+  imports: [TypeOrmModule.forFeature([Catalog, CatalogDetail])],
   controllers: [CatalogController],
-  providers: [CatalogService],
-  imports: [
-    TypeOrmModule.forFeature([
-      Catalog
-    ]),
-    CatalogDetailModule,
+  providers: [
+    CatalogRepositoryImpl,
+    GetCatalogUseCaseImpl,
+    CreateCatalogUseCaseImpl,
+    {
+      provide: 'elrepo',
+      useClass: CatalogRepositoryImpl,
+    },
+    {
+      provide: 'GetCatalogUseCase',
+      useClass: GetCatalogUseCaseImpl,
+    },
+    {
+      provide: 'CreateCatalogUseCase',
+      useClass: CreateCatalogUseCaseImpl,
+    },
   ],
-  exports: [CatalogService, TypeOrmModule]
-})
+
+}
+
+)
 export class CatalogModule {}

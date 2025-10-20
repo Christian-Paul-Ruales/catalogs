@@ -1,10 +1,10 @@
-import { Catalog } from "src/catalog/entities/catalog.entity";
+import { Catalog } from "src/catalog/infrastructure/persistence/entities/catalog.entity";
 import { BeforeInsert, BeforeUpdate, Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({name: "catalog-detail"})
 export class CatalogDetail {
     @PrimaryGeneratedColumn("uuid")
-    id: string;
+    id?: string;
 
     @ManyToOne(
         () => Catalog,

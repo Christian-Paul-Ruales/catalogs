@@ -1,5 +1,5 @@
 import { MaxLength } from "class-validator";
-import { CatalogDetail } from "src/catalog-detail/entities/catalog-detail.entity";
+import { CatalogDetail } from "src/catalog/infrastructure/persistence/entities/catalog-detail.entity";
 import { BeforeInsert, BeforeUpdate, Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({name: "catalog"})

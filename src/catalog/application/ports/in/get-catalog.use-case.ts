@@ -1,4 +1,4 @@
-import { Catalog } from "src/catalog/entities/catalog.entity";
+import { Catalog } from "src/catalog/infrastructure/persistence/entities/catalog.entity";
 
 export interface GetCatalogUseCase {
     /**
